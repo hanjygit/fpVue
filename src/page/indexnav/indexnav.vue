@@ -161,6 +161,11 @@ export default {
             this.navdata_first = data.data.resourceList;
             this.navdata_second = this.navdata_first[0].children;
             this.nowFirstIndex = 0;
+            if (this.$route.path === '/') {
+                // route为空，找到一个默认有权限菜单
+                this.$router.push(this.navdata_second[0].children[0].url)
+                console.log(this.navdata_second[0].children[0])
+            }
         },
         //选择一级菜单
         /*nextNav 下一级参数*/
@@ -201,6 +206,7 @@ export default {
                 if(this.$route.path.indexOf(item.url)!=-1){
                     this.nowFirstIndex = index;
                     this.navdata_second = item.children.length > 0 ? item.children : '' ;
+                    console.log(this.nowFirstIndex,'this.nowFirstIndex')
                 }
             });
             if(this.navdata_second){

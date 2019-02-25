@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <!--<img src="./assets/logo.png">
-    <router-view/>-->
-      <indexnav v-if="isRouterAlive"></indexnav>
+    <!--<img src="./assets/logo.png">-->
+    <router-view v-if="isRouterAlive"/>
+<!--    <indexnav></indexnav>-->
   </div>
 </template>
 
 <script>
-import indexnav from './page/indexnav/indexnav';
+//import indexnav from './page/indexnav/indexnav';
 import './components/css/commond.css';
 export default {
     name: 'App',
-    components:{
+   /* components:{
         indexnav
-    },
+    },*/
     data() {
         return {
             isRouterAlive:true,                 //true or false 来控制刷新当前页面
