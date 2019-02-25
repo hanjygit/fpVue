@@ -41,6 +41,47 @@ const storesearch= {
     }
 };
 
+// hint状态管理
+const storehint= {
+    state: { 
+        //页面共享数据
+        hintShow:false,  //true:hint显示
+        hintStatus:'',  //hint显示状态-样式
+        hintText:''     //hint显示文字
+    },
+    getters: {
+        getHintShow(state) {
+            // 获取hint显示
+            return state.hintShow;
+        },
+        getHintStatus(state) {
+            // 获取hint显示样式
+            return state.hintStatus;
+        },
+        getHintText(state) {
+            // 显示文字
+            return state.hintText;
+        }
+    },
+    mutations: {
+        changeHintShow(state,isTrue) {
+            // 处理hint显示
+            state.hintShow = isTrue;
+            if (isTrue) {
+                setTimeout(function() {
+                  state.hintShow = false;
+                }, 1500);
+            }
+        },
+        changeHintStatus(state, hintStatus) {
+            state.hintStatus = hintStatus;
+        },
+        changeHintText(state, hintText) {
+            state.hintText = hintText;
+        },
+    }
+};
+
 const store = new Vuex.Store({
     state: {
         dialogHintShow:false         //弹窗默认关闭 
@@ -59,6 +100,7 @@ const store = new Vuex.Store({
     },
     modules: {
         storesearch: storesearch,
+        storehint: storehint,
     }
 })
 

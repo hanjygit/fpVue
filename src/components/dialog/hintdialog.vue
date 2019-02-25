@@ -1,8 +1,14 @@
 <!--子组件-->
 <template>
+<!--
     <div class="dialogCommon" v-if="dialogShow">
         <div class="dialog">
             <div class="title" :class="dialogStatus=='success'?'greenmask':'redmask'">{{dialogTitle}}</div>
+        </div>
+    </div>
+-->
+    <div class="dialogCommon" v-show="this.$store.getters.getHintShow">
+        <div class="dialog" :class="this.$store.getters.getHintStatus">     {{this.$store.getters.getHintText}}
         </div>
     </div>
 </template>
@@ -10,7 +16,7 @@
 <script>
 export default {
     name:'hintdialog',
-    props: ['dialogTitle','dialogShow','dialogStatus'],
+   /* props: ['dialogTitle','dialogShow','dialogStatus'],*/
     data() {
         return {
         }

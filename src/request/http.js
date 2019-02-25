@@ -107,7 +107,7 @@ instance.interceptors.response.use(
             delCookie('GH_token');
             router.push('/login');
         } else {
-            //hintFunction(store, 'errorHint', res.data.message);
+            /*hintFunction(store, 'redmask', res.data.message);*/
             return res.data.message;
         }
     },
