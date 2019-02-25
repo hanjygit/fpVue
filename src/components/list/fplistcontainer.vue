@@ -14,7 +14,7 @@
 <script>
 export default {
     name:'fplistcontainer',
-    props: ['listData',''],
+    props: ['thData',''],
     data() {
         return {
             listHeader:'',
@@ -28,7 +28,7 @@ export default {
     created:function(){
     },
     mounted:function(){
-        this.listHeader = this.listData;
+        this.listHeader = this.thData;
     },
     methods:{
     }

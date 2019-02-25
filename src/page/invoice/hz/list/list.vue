@@ -43,7 +43,7 @@
                     <button class="whitebtn"> <img src="../../../../assets/invoice/sc.png">批量删除</button>
                 </div>
             </fplistbtn>
-            <fplistcontainer :listData="listHeader">
+            <fplistcontainer :thData="listTh">
                 <!--<ul slot="listContent" class="table-container">
                     <li v-for="(item, index) in this.listHeader" :key="index" class="table-header" ref="tableHeader"  :style="{width: item.width}">{{item.label}}</li>
                 </ul>-->
@@ -78,7 +78,105 @@ export default {
                 xhdwmc: '',
                 xxbbh: '',
             },
-            listHeader:[],
+            listTh:[
+                {
+                    label: '',
+                    column: '',
+                    width: "40px"
+                }, 
+                {
+                    label: "序号",
+                    column: "",
+                    width: "40px"
+                }, 
+                {
+                    label: "红字信息表申请单号",
+                    column: "sqdh",
+                    width: "200px"
+                }, 
+                {
+                    label: "红字信息表编号",
+                    column: "xxbbh",
+                    width: "200px"
+                }, 
+                {
+                    label: "信息表状态",
+                    column: "clzt",
+                    align: "left",
+                    width: "160px",
+                    /*custom: function (item) {
+                        return fapiao.baseInfoMap["XXBZT"][item.clzt] || '--';
+                    }*/
+                },
+                {
+                    label: "填开日期",
+                    column: "tkrq",
+                    align: "left",
+                    width: "150px",
+                    /*custom: function (item) {
+                        return item.tkrq ? new Date(Number(item.tkrq)).pattern('yyyy-MM-dd') : '';
+                    }*/
+                }, 
+                {
+                    label: "发票代码",
+                    column: "yfpdm",
+                    width: "120px"
+                }, 
+                {
+                    label: "发票号码",
+                    column: "yfphm",
+                    width: "120px"
+                }, 
+                {
+                    label: "购方名称",
+                    column: "ghdwmc",
+                    width: "150px"
+                }, 
+                {
+                    label: "金额",
+                    column: "hjje",
+                    width: "100px",
+                    /*custom: function (item) {
+                        return fapiao.formatMoney(item.hjje);
+                    }*/
+                }, 
+                {
+                    label: "税额",
+                    column: "hjse",
+                    width: "90px",
+                    /*custom: function (item) {
+                        return fapiao.formatMoney(item.hjse);
+                    }*/
+                }, 
+                {
+                    label: "销方名称",
+                    column: "xhdwmc",
+                    width: "160px"
+                }, 
+                {
+                    label: "操作",
+                    width: "250px",
+                    operates: [{
+                        label: "查看",
+                        name: "preView",
+                        isShow: true,
+                    }, {
+                        label: "申请",
+                        name: "preSQ",
+                        isShow: true,
+                    },
+                    {
+                        label: "同步结果",
+                        name: "preSH",
+                        isShow: true,
+                    },
+                    {
+                        label: "删除",
+                        name: "preDelete",
+                        isShow:true
+                    }]
+                }
+            ],
             //tdwidth:40,
         }
     },
