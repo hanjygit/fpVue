@@ -3,7 +3,7 @@
         <div class="header">
             <div class="first_nav">
                 <ul>
-                    <li v-for="(item, index) in this.navdata_first" :key="index" @click="chooseFirstNav(item,index)" :class="nowFirstIndex == index?'isFirstNav':''">{{ item.name }} </li>
+                    <li v-for="(item, index) in navdata_first" :key="index" @click="chooseFirstNav(item,index)" :class="nowFirstIndex == index?'isFirstNav':''">{{ item.name }} </li>
                 </ul>
             </div>
             <div class="right_header">
@@ -68,11 +68,15 @@
             </div>
         </fpdialog>
         
-       <!-- <fpdialog :dialogTitle="'退出'" @confirmCD="confirmLoginout" :closeDialog="closeDialog" :dialogShow="loginout.isLoginout">
+        <fpdialog :dialogTitle="'退出'" :closeDialog="closeDialog" :dialogShow="loginout.isLoginout">
             <div slot="dialogContent">
                 <div class="hint-label">确认退出么？</div>
             </div>
-        </fpdialog>-->
+            <div class="button-box" slot="dialogBtn">
+                <button class="bluebtn" @click="confirmLogout">确认</button>
+                <button class="bluebtn" @click="closeDialog">取消</button>
+            </div>
+        </fpdialog>
         
         <hintdialog :dialogTitle="isdialogTitle" :dialogShow="isdialogShow" :dialogStatus="isdialogStatus"></hintdialog>
     </div>
@@ -248,8 +252,8 @@ export default {
             /*this.closeDialog();*/
         },
         //确认退出
-        confirmLoginout:function(){
-            console.log('退出')
+        confirmLogout:function(){
+            this.$router.push('/login');
         },
     }
 }

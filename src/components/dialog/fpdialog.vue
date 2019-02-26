@@ -58,6 +58,7 @@ export default {
         left: 0;
     }
     .dialog{
+        min-width:280px;
         position: fixed;
         top:50%;
         left: 50%;

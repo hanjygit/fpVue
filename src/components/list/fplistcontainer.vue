@@ -11,11 +11,6 @@
                 <div v-for="(item, index) in listHeader" :key="index" class="table-body" :style="{width: item.width}" v-if="index==1">{{index}}</div>
                 <div v-for="(item, index) in listHeader" :key="index" class="table-body" :style="{width: item.width}" v-if="index>1">{{item.column}}</div>
             </div>
-            <div class="tb-container" ref="thwidth">
-                <div v-for="(item, index) in listHeader" :key="index" class="table-body" :style="{width: item.width}" v-if="index==0">单选框</div>
-                <div v-for="(item, index) in listHeader" :key="index" class="table-body" :style="{width: item.width}" v-if="index==1">{{index}}</div>
-                <div v-for="(item, index) in listHeader" :key="index" class="table-body" :style="{width: item.width}" v-if="index>1">{{item.column}}</div>
-            </div>
         </div>
         <div class="footerList"></div>
     </div>
