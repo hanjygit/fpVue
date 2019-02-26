@@ -7,6 +7,7 @@ import axios from 'axios';
 import store from '../store/index';
 //import { Toast } from 'vant';
 import {hintFunction} from 'common/js/hint.js'
+import {setCookie, getCookie} from 'common/js/cookie';
 
 /**
   * 提示函数
