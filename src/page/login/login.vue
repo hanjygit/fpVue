@@ -71,16 +71,18 @@ export default {
                 let _this = this;
                 this.$api.api.LOGIN(data)
                     .then(res=> {
-                    console.log(res)
                     // 执行某些操作
                     if (res instanceof Object) {
+                        console.log(0)
                         setCookie('GH_token', res.token);
-                        console.log(getCookie('GH_token'));
+                        console.log(1)
                         window.localStorage.setItem('userInfo', JSON.stringify(res.user));
-                        Vue.prototype.$http.defaults.headers.common['x-access-token'] = getCookie('GH_token') || '';
-//                        this.loginError = false;
-//                        this.errorMessage = '';
-//                        this.$router.push('/');
+                        console.log(2)
+                        Vue.prototype.instance.defaults.headers.common['x-access-token'] = getCookie('GH_token') || '';
+                        console.log(3)
+                        this.loginError = false;
+                        this.errorMessage = '';
+                        this.$router.push('/');
                     }
                 }).catch(res=> {
                     // 执行某些操作

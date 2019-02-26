@@ -117,7 +117,6 @@ export default {
         
     },
     created:function(){
-        //this.getToken();
         this.getNavData();
         this.getNav();
     },
@@ -137,20 +136,6 @@ export default {
         }
     },
     methods:{
-        getToken:function(){
-            var data = {
-                'userName': "admin",
-                'password': "e10adc3949ba59abbe56e057f20f883e"
-            };
-            this.$api.api.LOGIN(data)
-                .then(res=> {
-                // 执行某些操作
-                /*document.cookie = */
-                console.log(res)
-            }).catch(res=> {
-                // 执行某些操作
-            })
-        },
         changeFixed(clientWidth ){
             if(this.$refs.content){
               this.$refs.content.style.width = clientWidth  -200 + 'px';
@@ -164,7 +149,6 @@ export default {
             if (this.$route.path === '/') {
                 // route为空，找到一个默认有权限菜单
                 this.$router.push(this.navdata_second[0].children[0].url)
-                console.log(this.navdata_second[0].children[0])
             }
         },
         //选择一级菜单
@@ -206,7 +190,6 @@ export default {
                 if(this.$route.path.indexOf(item.url)!=-1){
                     this.nowFirstIndex = index;
                     this.navdata_second = item.children.length > 0 ? item.children : '' ;
-                    console.log(this.nowFirstIndex,'this.nowFirstIndex')
                 }
             });
             if(this.navdata_second){
