@@ -4,11 +4,11 @@
   */
 import axios from 'axios';
 import Vue from 'vue'
-//import router from '../router';
+import router from '../router';
 import store from '../store/index';
 //import { Toast } from 'vant';
 import {hintFunction} from 'common/js/hint.js'
-import {setCookie, getCookie} from 'common/js/cookie';
+import {setCookie, getCookie,delCookie} from 'common/js/cookie';
 
 /**
   * 提示函数

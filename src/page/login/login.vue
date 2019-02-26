@@ -34,7 +34,7 @@ import Vue from 'vue';
 import md5 from 'js-md5';
 import hintdialog from 'components/dialog/hintdialog.vue'
 import {hintFunction} from 'common/js/hint.js'
-import {setCookie, getCookie} from 'common/js/cookie';
+import {setCookie, getCookie,delCookie} from 'common/js/cookie';
 
 export default {
     name:'login',
@@ -52,7 +52,14 @@ export default {
             isdialogShow:false,                   //弹窗是否显示
         }
     },
+    created:function(){
+        this.clearCookie();
+    },
     methods:{
+        clearCookie(){
+            console.log(getCookie('GH_token'))
+            delCookie('GH_token');
+        },
         login(){
             let regName = /[a-zA-Z0-9]{1,30}/g;
             if (!regName.test(this.username)) {
@@ -73,13 +80,9 @@ export default {
                     .then(res=> {
                     // 执行某些操作
                     if (res instanceof Object) {
-                        console.log(0)
                         setCookie('GH_token', res.token);
-                        console.log(1)
                         window.localStorage.setItem('userInfo', JSON.stringify(res.user));
-                        console.log(2)
                         Vue.prototype.instance.defaults.headers.common['x-access-token'] = getCookie('GH_token') || '';
-                        console.log(3)
                         this.loginError = false;
                         this.errorMessage = '';
                         this.$router.push('/');
