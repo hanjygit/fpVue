@@ -7,8 +7,9 @@
         </div>
     </div>
 -->
-    <div class="dialogCommon" v-show="this.$store.getters.getHintShow">
-        <div class="dialog" :class="this.$store.getters.getHintStatus">     {{this.$store.getters.getHintText}}
+    <div class="hintBox" v-show="this.$store.getters.getHintShow">
+        <div class="hintText" :class="this.$store.getters.getHintStatus"> 
+        {{this.$store.getters.getHintText}}
         </div>
     </div>
 </template>
@@ -31,36 +32,29 @@ export default {
 }
 </script>
 <style scoped lang="less">
-    .dialogCommon{
-        position: relative;
+    .hintBox{
+        position: relative
     }
-    .dialog{
+    .hintText{
+        min-width: 280px;
+        max-width: 500px;
+        height: auto;
+        min-height: 20px;
+        line-height: 20px;
+        padding: 30px 15px;
         position: fixed;
         top:50%;
-        left: 50%;
-        background-color: #fff;
-        border-radius: 4px;
-        margin-top: -10px;
-        margin-left: -100px;
-        z-index: 32009;
-        .title{
-            min-width: 200px;
-            min-height: 20px;
-            line-height: 20px;
-            font-size: 16px;
-            font-family: MicrosoftYaHei-Bold;
-            font-weight: 700;
-            color: #000;
-            border-radius: 4px;
-            box-sizing: border-box;
-            text-align: center;
-            padding: 20px;
-        }
-        .redmask{
-            background-color: rgba(234,28,36,0.5)
-        }
-        .greenmask{
-            background-color: rgba(28,234,80,0.5)
-        }
+        left:50%;
+        transform:translate(-50%,-50%);
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+        border-radius: 5px;
+    }
+    .errmask{
+        background-color: rgba(234,28,36,0.5)
+    }
+    .successmask{
+        background-color: rgba(28,234,80,0.5)
     }
 </style>

@@ -20,7 +20,7 @@
                   <input v-model="password" type="password" placeholder="请输入密码" value="" class="identify-code" id="passwordclick">
                 </div>
               </div>
-              <div class="icon-error ui-hide" id="error" v-show="loginError">{{errorMessage}}</div>
+              <div class="icon-error" id="error" v-show="loginError">{{errorMessage}}</div>
               <input @click="login()" value="登录" type="button" class="btn-login">
             </form>
           </div>
@@ -32,8 +32,9 @@
 <script>
 import Vue from 'vue';
 import md5 from 'js-md5';
-import hintdialog from '../../components/dialog/hintdialog.vue'
-import {hintFunction} from 'components/js/hint.js'
+import hintdialog from 'components/dialog/hintdialog.vue'
+import {hintFunction} from 'common/js/hint.js'
+import {setCookie, getCookie} from 'common/js/cookie';
 
 export default {
     name:'login',
@@ -53,44 +54,63 @@ export default {
     },
     methods:{
         login(){
-            var data = {
-                'userName': this.username,
-                'password': md5(this.password)
-            };
-            let _this = this;
-            hintFunction(_this.$store, 'redmask', 'res.data.message');
-            /*this.$api.api.LOGIN(data)
-                .then(res=> {
-                // 执行某些操作
-                console.log(res)
-            }).catch(res=> {
-                // 执行某些操作
-            })*/
+            let regName = /[a-zA-Z0-9]{1,30}/g;
+            if (!regName.test(this.username)) {
+              this.loginError = true;
+              this.errorMessage = '*请输入1-30位的用户名';
+              return false;
+            } else if (this.password.length === 0) {
+              this.loginError = true;
+              this.errorMessage = '*请输入登录密码';
+              return false;
+            } else {
+                var data = {
+                    'userName': this.username,
+                    'password': md5(this.password)
+                };
+                let _this = this;
+                this.$api.api.LOGIN(data)
+                    .then(res=> {
+                    console.log(res)
+                    // 执行某些操作
+                    if (res instanceof Object) {
+                        setCookie('GH_token', res.token);
+                        console.log(getCookie('GH_token'));
+                        window.localStorage.setItem('userInfo', JSON.stringify(res.user));
+                        Vue.prototype.$http.defaults.headers.common['x-access-token'] = getCookie('GH_token') || '';
+//                        this.loginError = false;
+//                        this.errorMessage = '';
+//                        this.$router.push('/');
+                    }
+                }).catch(res=> {
+                    // 执行某些操作
+                })
+            }
         }
     },
 }
 </script>
 <style scoped lang="less">
-     .ui-text {
-    width: auto !important;
-    height: auto !important;
-  }
-  .ui-text input{
-    background-color: #F5F5F5 !important;
-    color: #333 !important;
-    font-size: 16px !important;
-    line-height: 46px;
-    padding: 0!important;
-    width: 100%;
-    height: 100%;
-  }
-  .ui-input {
-    display: block !important;
-  }
+    .ui-text {
+        width: auto !important;
+        height: auto !important;
+    }
+    .ui-text input{
+        background-color: #F5F5F5 !important;
+        color: #333 !important;
+        font-size: 16px !important;
+        line-height: 46px;
+        padding: 0!important;
+        width: 100%;
+        height: 100%;
+    }
+    .ui-input {
+        display: block !important;
+    }
 
-  .ui-button{
-    padding: 0!important;
-  }
+    .ui-button{
+        padding: 0!important;
+    }
 
   .ui-placeholder {
     height: 100%;
@@ -133,7 +153,7 @@ export default {
   .icon-error {
     position: absolute;
     left: 25px;
-    top: 135px;
+    top: 115px;
     color: #f95e08;
     margin-top: 5px;
     font-size: 14px;

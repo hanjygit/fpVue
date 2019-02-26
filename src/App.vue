@@ -8,7 +8,7 @@
 
 <script>
 //import indexnav from './page/indexnav/indexnav';
-import './components/css/commond.css';
+import 'common/css/commond.css';
 export default {
     name: 'App',
    /* components:{

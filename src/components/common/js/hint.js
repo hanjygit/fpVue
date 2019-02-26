@@ -9,5 +9,4 @@ export function hintFunction(store, changeHintStatus, changeHintText) {
   store.commit('changeHintShow', true);
   store.commit('changeHintStatus', changeHintStatus);
   store.commit('changeHintText', changeHintText);
-    console.log(changeHintStatus)
 }

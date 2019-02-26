@@ -79,9 +79,9 @@
 </template>
 
 <script>
-import data from '../../components/js/commondata.js'
-import fpdialog from '../../components/dialog/fpdialog.vue'
-import hintdialog from '../../components/dialog/hintdialog.vue'
+import data from 'common/js/commondata.js'
+import fpdialog from 'components/dialog/fpdialog.vue'
+import hintdialog from 'components/dialog/hintdialog.vue'
 export default {
     name:'indexnav',
     inject: ['reload'],

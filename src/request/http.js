@@ -6,6 +6,7 @@ import axios from 'axios';
 //import router from '../router';
 import store from '../store/index';
 //import { Toast } from 'vant';
+import {hintFunction} from 'common/js/hint.js'
 
 /**
   * 提示函数
@@ -70,16 +71,18 @@ const errorHandle = (status, other) => {
         }
 }
 
+
+if (!getCookie('GH_token') || getCookie('GH_token') === 'undefined') {
+  router.push('/login');
+}
+
 // 创建axios实例
 var instance = axios.create({
     timeout: 1000 * 12,
 });
 // 设置post请求头
-//instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;';
 instance.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-//instance.defaults.baseURL = 'http://192.168.7.76';
-//instance.defaults.headers['x-access-token'] = token;
-
+instance.defaults.headers.common['x-access-token'] = getCookie('GH_token') || '';
 /**
   * 请求拦截器
   * 每次请求前，如果存在token则在请求头中携带token
@@ -94,7 +97,8 @@ instance.interceptors.request.use(
         token && (config.headers.Authorization = token);
         return config;
     },
-    error => Promise.error(error))
+    error => Promise.error(error)
+)
 
 // 响应拦截器
 instance.interceptors.response.use(
@@ -107,7 +111,7 @@ instance.interceptors.response.use(
             delCookie('GH_token');
             router.push('/login');
         } else {
-            /*hintFunction(store, 'redmask', res.data.message);*/
+            hintFunction(store, 'errmask', res.data.message);
             return res.data.message;
         }
     },
@@ -116,7 +120,7 @@ instance.interceptors.response.use(
         const { response } = error;
         if (response) {
             // 请求已发出，但是不在2xx的范围
-            errorHandle(response.status, response.data.message);
+            //errorHandle(response.status, response.data.message);
             return Promise.reject(response);
         } else {
             // 处理断网的情况
