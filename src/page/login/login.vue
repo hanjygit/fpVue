@@ -57,7 +57,6 @@ export default {
     },
     methods:{
         clearCookie(){
-            console.log(getCookie('GH_token'))
             delCookie('GH_token');
         },
         login(){

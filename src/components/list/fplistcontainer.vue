@@ -3,13 +3,18 @@
     <div class="listContent">
         <!--<slot name="listContent"></slot>-->
         <div class="tableList">
-            <div class="th-container" ref="thwidth">
+            <div class="th-container">
+                <div class="table-header" style="width:40px"></div>
+                <div class="table-header" style="width:40px">序号</div>
                 <div v-for="(item, index) in listHeader" :key="index" class="table-header" :style="{width: item.width}">{{item.label}}</div>
             </div>
-            <div class="tb-container" ref="thwidth">
-                <div v-for="(item, index) in listHeader" :key="index" class="table-body" :style="{width: item.width}" v-if="index==0">单选框</div>
-                <div v-for="(item, index) in listHeader" :key="index" class="table-body" :style="{width: item.width}" v-if="index==1">{{index}}</div>
-                <div v-for="(item, index) in listHeader" :key="index" class="table-body" :style="{width: item.width}" v-if="index>1">{{item.column}}</div>
+            <div class="tb-container" v-for="(item, index) in listTable" :key="index">
+                <div class="table-body" style="width:40px">单选框</div>
+                <div class="table-body" style="width:40px"></div>
+                <div class="table-body" v-for="(_item, _index) in listHeader" :style="{width: _item.width}">
+                <div v-if="_item.column">{{item[_item.column]}}</div>
+                <div v-if="_item.operates" v-for="itemBtn in _item.operates" class="oprateBtn" @click="itemBtn.clickAction(item)">{{itemBtn.label}}</div>
+                </div>
             </div>
         </div>
         <div class="footerList"></div>
@@ -19,23 +24,33 @@
 <script>
 export default {
     name:'fplistcontainer',
-    props: ['thData',''],
+    props: ['thData','tbData'],
     data() {
         return {
             listHeader:'',
+            listTable:'',
             //thwidth:'',
         }
     },
     modules: {
         
     },
-    
     created:function(){
     },
     mounted:function(){
         this.listHeader = this.thData;
     },
-    methods:{
+    watch:{
+        tbData: {  
+            handler(newValue, oldValue) {  
+                for (let i = 0; i < newValue.length; i++) {  
+                    if (oldValue[i] != newValue[i]) {  
+                        this.listTable = newValue;
+                    }  
+                }
+            },  
+            deep: true
+        } 
     }
 }
 </script>
@@ -89,5 +104,22 @@ export default {
     }
     .tb-container:nth-child(odd) .table-body{
         background-color:#f2f3f5;
+    }
+    .oprateBtn{
+        display: inline-block;
+        vertical-align: middle;
+        height: 24px;
+        line-height: 24px;
+        padding: 2px 7px;
+        margin: 0 0 0 10px;
+        font-size: 13px;
+        background: #4DA1FF;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        color: #FFF;
+        cursor: pointer;
     }
 </style>

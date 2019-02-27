@@ -43,7 +43,7 @@
                     <button class="whitebtn"> <img src="../../../../assets/invoice/sc.png">批量删除</button>
                 </div>
             </fplistbtn>
-            <fplistcontainer :thData="listTh">
+            <fplistcontainer :thData="listTh" :tbData="listtbData">
                 <!--<ul slot="listContent" class="table-container">
                     <li v-for="(item, index) in this.listHeader" :key="index" class="table-header" ref="tableHeader"  :style="{width: item.width}">{{item.label}}</li>
                 </ul>-->
@@ -67,10 +67,14 @@ export default {
         fplistcontainer
     },
     data() {
+        let _this = this;
         return {
+            isgetList:false,
             searchParm: {
                 /*startTime: this.formartDate(),
                 endTime: this.formartDate(),*/
+                startTime: '',
+                endTime: "",
                 currentPage: '1',
                 pageSize: '20',
                 ghdwmc: '',
@@ -78,17 +82,8 @@ export default {
                 xhdwmc: '',
                 xxbbh: '',
             },
+            //表头等信息
             listTh:[
-                {
-                    label: '',
-                    column: '',
-                    width: "40px"
-                }, 
-                {
-                    label: "序号",
-                    column: "",
-                    width: "40px"
-                }, 
                 {
                     label: "红字信息表申请单号",
                     column: "sqdh",
@@ -160,6 +155,25 @@ export default {
                         label: "查看",
                         name: "preView",
                         isShow: true,
+                        clickAction(invoice){
+                            var paramList ={};
+                            paramList.fpDm = invoice.yfpdm;
+                            paramList.fpHm = invoice.yfphm;
+                            console.log(paramList)
+                            /*invoice.backfillType = 'hzxxb';
+                            var checkid = invoice.id;
+                            ecui.esr.request('data@JSON ' + URLS.API.HZXXB_GL_CK + '?id='+checkid, function () {
+                                var data = ecui.esr.getData('data');
+                                    data.tkrq = new Date(Number(data.tkrq)).pattern('yyyy-MM-dd');
+                                var dialog = fapiao.initDialog(ecui.$('dialog2Container'), 'list.hzxxbckDialog',{
+                                    buttonShow:false,
+                                    addType:'addHZ'
+                                });
+                                dialog.showModal();
+                                var form1 = document.forms.hzxxckForm;
+                                fapiao.backfillDtata.init(data, form1, paramList, 'hzxxbGL',false);
+                            });*/
+                        }
                     }, {
                         label: "申请",
                         name: "preSQ",
@@ -173,11 +187,67 @@ export default {
                     {
                         label: "删除",
                         name: "preDelete",
-                        isShow:true
+                        isShow:true,
+                        clickAction: function (invoice) {
+                            //console.log(invoice.id)
+                            _this.searchQuery();
+                            //this.searchQuery();
+                            /*ecui.confirm({'title': '删除', 'content': '确定要删除该数据吗'}, function () {
+                                ecui.esr.request('data@JSON ' + URLS.API.HZXXB_GL_DELALL + '?ids=' + invoice.id, function () {
+                                    var data = ecui.esr.getData('data');
+                                    if (data instanceof Object) {
+                                        fapiao.showHint('success', '删除成功');
+                                        _this.reload();
+                                    }
+                                });
+                            });*/
+                        }
                     }]
                 }
             ],
-            //tdwidth:40,
+            //查询list信息
+            listtbData:[],
+            fhlistdata: {
+                "code": "0000",
+                "data": {
+                    "count": 1,
+                    "currentPage": 1,
+                    "list": [
+                        {
+                            "clzt": 0,
+                            "flag": null,
+                            "ghdwmc": "123",
+                            "ghdwsbh": "123",
+                            "hjje": "-94.34",
+                            "hjse": "-5.66",
+                            "id": "774AFEB655E245789B870C3E271CCFD8",
+                            "kpzddm": "123456",
+                            "lines": [],
+                            "lxfs": "158965587511",
+                            "nsrsbh": "1101011234567890000Q",
+                            "returncode": "",
+                            "returnmsg": "",
+                            "sfdk": null,
+                            "sqdh": "",
+                            "sqjgmc": "顺丰快递公司",
+                            "sqlx": 2,
+                            "sqly": "",
+                            "sqrmc": "管理员",
+                            "tkrid": 1,
+                            "tkrq": 1548728252000,
+                            "xhdwmc": "顺丰快递公司",
+                            "xhdwsbh": "1101011234567890000Q",
+                            "xxbbh": "",
+                            "yfpdm": "123123",
+                            "yfphm": "123123",
+                            "ywlx": 0,
+                            "zdbz": null
+                        }
+                    ],
+                    "pageSize": 20
+                },
+                "message": "返回数据成功"
+            }
         }
     },
     created:function(){
@@ -198,10 +268,15 @@ export default {
             return Y + M + D ;
         },*/
         searchQuery:function(){
-            // 调用api接口，并且提供了两个参数    
-            /*this.$api.api.HZXXB_GL_CX(this.searchParm)
+            this.listtbData = this.fhlistdata.data.list;
+            console.log(this.listtbData,'this.listtbData')
+            /*let _this = this;
+            this.$api.api.HZXXB_GL_CX(this.searchParm)
                 .then(res=> {
                 // 执行某些操作
+                if (res instanceof Object) {
+                    
+                }
             }).catch(res=> {
                 // 执行某些操作
             })*/
