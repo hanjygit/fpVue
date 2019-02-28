@@ -18,7 +18,7 @@
             <div class="leftPart" @click="routeClick">
                 <div class="second_nav">
                     <ul>
-                        <li v-for="(item, index) in this.navdata_second" :key="index" @click.capture="chooseSecondNav(item, index)" :class="nowSecondIndex == index?'isSecondNav':''">
+                        <li v-for="(item, index) in navdata_second" :key="index" @click.capture="chooseSecondNav(item, index)" :class="nowSecondIndex == index?'isSecondNav':''">
                             <div v-if="item.children.length == 0">
                                 <router-link class="second_navText" :class="nowSecondIndex == index?'isSecondNav':''" :to="item.url">
                                     {{ item.name }}
@@ -156,12 +156,12 @@ export default {
                 // 执行某些操作
             })*/
             this.navdata_first = data.data.resourceList;
-                this.navdata_second = this.navdata_first[0].children;
-                this.nowFirstIndex = 0;
-                if (this.$route.path === '/') {
-                    // route为空，找到一个默认有权限菜单
-                    this.$router.push(this.navdata_second[0].children[0].url)
-                }
+            this.navdata_second = this.navdata_first[0].children;
+            this.nowFirstIndex = 0;
+            if (this.$route.path === '/') {
+                // route为空，找到一个默认有权限菜单
+                this.$router.push(this.navdata_second[0].children[0].url)
+            }
         },
         //选择一级菜单
         /*nextNav 下一级参数*/
