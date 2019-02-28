@@ -12,7 +12,13 @@
                 <div class="table-body" style="width:40px">单选框</div>
                 <div class="table-body" style="width:40px"></div>
                 <div class="table-body" v-for="(_item, _index) in listHeader" :style="{width: _item.width}">
-                <div v-if="_item.column">{{item[_item.column]}}</div>
+                <!--转换数据-->
+                <div v-if="_item.needTransform">{{dataConversion(item[_item.column], _item.transformData)}}</div>
+                <!--转换时间-->
+                <div v-if="_item.needDate">{{dateConversion(item[_item.column])}}</div>
+                <!--不转换 直接显示-->
+                <div v-if="_item.column && !_item.needTransform && !_item.needDate">{{item[_item.column]}}</div>
+                <!--操作：点击操作事件-->
                 <div v-if="_item.operates" v-for="itemBtn in _item.operates" class="oprateBtn" @click="itemBtn.clickAction(item)">{{itemBtn.label}}</div>
                 </div>
             </div>
@@ -22,6 +28,8 @@
 </template>
 
 <script>
+    import {dataConversion} from 'globaldata/globaldata';
+    import {dateConversion} from 'globaldata/globaldata';
 export default {
     name:'fplistcontainer',
     props: ['thData','tbData'],
@@ -29,7 +37,8 @@ export default {
         return {
             listHeader:'',
             listTable:'',
-            //thwidth:'',
+            dataConversion:dataConversion,
+            dateConversion:dateConversion,
         }
     },
     modules: {

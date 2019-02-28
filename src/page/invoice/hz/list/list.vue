@@ -103,16 +103,15 @@ export default {
                     // 是否需要转换数据
                     needTransform: true,
                     // 转换数据
-                    transformData: globaldata.XXBZT
+                    transformData: globaldata.globaldata.XXBZT,
                 },
                 {
                     label: "填开日期",
                     column: "tkrq",
                     align: "left",
                     width: "150px",
-                    /*custom: function (item) {
-                        return item.tkrq ? new Date(Number(item.tkrq)).pattern('yyyy-MM-dd') : '';
-                    }*/
+                    // 是否需要转换时间
+                    needDate: true,
                 }, 
                 {
                     label: "发票代码",
@@ -271,7 +270,6 @@ export default {
         },*/
         searchQuery:function(){
             this.listtbData = this.fhlistdata.data.list;
-            console.log(this.listtbData,'this.listtbData')
             /*let _this = this;
             this.$api.api.HZXXB_GL_CX(this.searchParm)
                 .then(res=> {

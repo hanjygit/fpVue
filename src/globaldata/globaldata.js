@@ -95,7 +95,8 @@ var globaldata = {
             text: "审核不通过"
         }
     ],
-
+    TKRQ:''
+    ,
     // 正则
     userNameRegexp: /^[a-zA-Z0-9]{1,30}$/,
     realNameRegexp: /^[\u4E00-\u9FA5a-zA-Z]{2,10}$/,
@@ -104,6 +105,28 @@ var globaldata = {
     nameRegexp: /^[\u4E00-\u9FA5a-zA-Z]{2,10}$/,
     emailRegexp: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
 }
+
+/**
+ *  dataConversion数据转换
+ *  data 需要转换的值
+ *  dataSource 数据源
+ **/
+export function dataConversion(data, dataSource) {
+    for (let dataKey in dataSource) {
+        if ((dataSource[dataKey].code || dataSource[dataKey].id) == data) {
+            return dataSource[dataKey].name || dataSource[dataKey].text;
+        }
+    }
+}
+/**
+ *  dateConversion数据转换
+ *  data 需要转换的值
+ *  dataSource 数据源
+ **/
+export function dateConversion(data) {
+    return data ? new Date(Number(data)).toLocaleDateString().replace(/\//g, "-") : '';
+}
+
 export default {
     globaldata
 }
