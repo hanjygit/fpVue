@@ -54,9 +54,10 @@
 
 <script>
 // import listdata from '../list/list.js'
-import fpsearch from '../../../../components/list/fpsearch.vue'
-import fplistbtn from '../../../../components/list/fplistBtn.vue'
-import fplistcontainer from '../../../../components/list/fplistcontainer.vue'
+import fpsearch from 'components/list/fpsearch.vue'
+import fplistbtn from 'components/list/fplistBtn.vue'
+import fplistcontainer from 'components/list/fplistcontainer.vue'
+import globaldata from 'globaldata/globaldata';
 //import { HZXXB_GL_CX } from '../../../../request/api';// 导入我们的api接口
 
 export default {
@@ -99,9 +100,10 @@ export default {
                     column: "clzt",
                     align: "left",
                     width: "160px",
-                    /*custom: function (item) {
-                        return fapiao.baseInfoMap["XXBZT"][item.clzt] || '--';
-                    }*/
+                    // 是否需要转换数据
+                    needTransform: true,
+                    // 转换数据
+                    transformData: globaldata.XXBZT
                 },
                 {
                     label: "填开日期",
