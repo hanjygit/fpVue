@@ -147,13 +147,21 @@ export default {
         },
         //获得菜单数据
         getNavData:function(){
+            /*var params = {
+                userId:JSON.parse(window.localStorage.getItem('userInfo')).id
+            };
+            this.$api.api.USERMENU(params).then(res=> {
+                
+            }).catch(res=> {
+                // 执行某些操作
+            })*/
             this.navdata_first = data.data.resourceList;
-            this.navdata_second = this.navdata_first[0].children;
-            this.nowFirstIndex = 0;
-            if (this.$route.path === '/') {
-                // route为空，找到一个默认有权限菜单
-                this.$router.push(this.navdata_second[0].children[0].url)
-            }
+                this.navdata_second = this.navdata_first[0].children;
+                this.nowFirstIndex = 0;
+                if (this.$route.path === '/') {
+                    // route为空，找到一个默认有权限菜单
+                    this.$router.push(this.navdata_second[0].children[0].url)
+                }
         },
         //选择一级菜单
         /*nextNav 下一级参数*/

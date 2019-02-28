@@ -74,7 +74,6 @@ export default {
                     'userName': this.username,
                     'password': md5(this.password)
                 };
-                let _this = this;
                 this.$api.api.LOGIN(data)
                     .then(res=> {
                     // 执行某些操作

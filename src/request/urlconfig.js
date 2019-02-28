@@ -15,6 +15,9 @@ URLS.RBAC = {
     LOGIN_OUT: URLS.RBAC_BASE + "/mvc/logout",
     MESSAGE: URLS.RBAC_BASE + "/mvc/alertMessage/countUnread",   //未读消息
 
+    //菜单
+    MENU_GET_USER: URLS.RBAC_BASE + "/mvc/resource/findTreeByUser", //POST  查询用户有权限的菜单
+    
     // 开具
     GM_GET_LIST: URLS.RBAC_BASE + "/mvc/customer/getList", //POST 查询客户信息列表
     SPMC_GET_LIST: URLS.RBAC_BASE + "/mvc/commodityInfo/getList", //POST 查询商品信息列表
@@ -68,9 +71,6 @@ URLS.RBAC = {
     ROLE_ROLEENABLED: URLS.RBAC_BASE + "/mvc/role/updateEnabled", // POST 停、启用权限
     ROLE_ROLEEAUTH: URLS.RBAC_BASE + "/mvc/organization/getAuthList", // POST 获取机构权限
     ROLE_FINDTREE: URLS.RBAC_BASE + "/mvc/resource/findTree", // POST 获取机构权限
-
-
-    MENU_GET_USER: URLS.RBAC_BASE + "/mvc/resource/findTreeByUser?userId=${userId}", //POST  查询用户有权限的菜单
 
     // 商品管理
     GOOD_QUERY: URLS.RBAC_BASE + "/mvc/commodityInfo/getList", //POST 查询商品信息列表

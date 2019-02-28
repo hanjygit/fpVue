@@ -12,6 +12,10 @@ const api = {
     LOGIN (params) {
         return axios.post(`${URLS.RBAC.LOGIN}`, params);
     },
+    //用户-菜单 GET
+    USERMENU (params) {
+        return axios.get(`${URLS.RBAC.MENU_GET_USER}`, {params: params});
+    },
     //红字信息表管理查询列表 post
     HZXXB_GL_CX (params) {
         return axios.post(`${URLS.API.HZXXB_GL_CX}`, params);
