@@ -23,7 +23,45 @@
                 </div>
             </div>
         </div>
-        <div class="footerList"></div>
+        <div class="footerList" @click="sendpage">
+            <div class="selectBox">
+              <div class="selectBox_show" @click.stop="arrowDown">
+                <i class="icon icon_arrowDown"></i>
+                <p>{{pageVal}}</p>
+                <!--<input name="unit" v-model="pageVal">-->
+              </div>
+              <div class="selectBox_list" v-show="isShowSelect">
+                <div class="selectBox_listLi" v-for="(item, index) in pageList"
+                     @click="select(item, index)" :class="pageVal==item.value?'selectBox_listfocus':''">{{item.value}}
+                </div>
+              </div>
+            </div>
+
+            <!--<div class="page-select  ui-select ui-input ">
+                <div class="ui-select-text ui-input-text page-select-text " style="width: 25px; height: 16px;">20</div>
+                <input value="20" readonly="" placeholder="">
+            </div>-->
+            <!--<select>
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="20">50</option>
+                <option value="20">100</option>
+            </select>-->
+            <!--<div class="line"></div>
+            <div class="page-btn   page-btn-disabled  ui-disabled"><div class="first"></div></div>
+            <div class="page-btn   page-btn-disabled  ui-disabled"><div class="prev"></div></div>
+            <div class="line"></div>
+            <div class="page-go">第<div class="ui-input ui-number ui-text"><input value="1"></div>共0页</div>
+            <div class="line"></div>
+            <div class="page-btn   page-btn-disabled  ui-disabled"><div class="next"></div></div>
+            <div class="page-btn   page-btn-disabled  ui-disabled"><div class="last"></div></div>
+            <div class="line"></div>
+            <div class="page-btn  "><div class="refresh"></div></div>
+            <div class="page-info">显示1到20，共0记录</div>-->
+        </div>
+        
     </div>
 </template>
 
@@ -39,6 +77,18 @@ export default {
             listTable:'',
             dataConversion:dataConversion,
             dateConversion:dateConversion,
+            //翻页选择页面
+            isShowSelect: false,
+            pageList: [
+                {key: 1, value: "1"},
+                {key: 2, value: "5"},
+                {key: 3, value: "10"},
+                {key: 4, value: "20"},
+                {key: 5, value: "50"},
+                {key: 6, value: "100"},
+            ],
+            pageVal:'1',
+            unitModel:''
         }
     },
     modules: {
@@ -60,6 +110,18 @@ export default {
             },  
             deep: true
         } 
+    },
+    methods: {
+        arrowDown() {
+            this.isShowSelect = !this.isShowSelect;
+        },
+        select(item, index) {
+            this.isShowSelect = false;
+            this.pageVal = item.value;
+        },
+        sendpage(){
+            this.$emit('pageCallBack', this.pageVal);
+        }
     }
 }
 </script>
@@ -130,5 +192,46 @@ export default {
         -o-border-radius: 4px;
         color: #FFF;
         cursor: pointer;
+    }
+    .footerList{
+        margin-top: 10px;
+        font-size: 0;
+        .selectBox{
+            display: inline-block;
+            vertical-align: middle;
+            width: 50px;
+            font-size: 14px;
+            margin: 0 6px;
+            .selectBox_show{
+                p{
+                    padding-left: 5px;
+                    width: 50px;
+                    border: 1px solid #E0E0E0;
+                    border-radius: 4px;
+                }
+            }
+            .selectBox_list{
+                width: 50px;
+                height: auto;
+                position: absolute;
+                top: 225px;
+                border: 1px solid #d7d8d9;
+                background: #fff;
+                .selectBox_listLi{
+                    height: 16px;
+                    line-height: 16px;
+                    font-size: 14px;
+                    text-indent: 5px;
+                    cursor: pointer;
+                }
+                .selectBox_listfocus{
+                    color: #4DA1FF;
+                }
+                .selectBox_listLi:hover{
+                    background-color: #4DA1FF;
+                    color: #fff;
+                }
+            }
+        }
     }
 </style>

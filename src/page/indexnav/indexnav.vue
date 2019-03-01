@@ -319,7 +319,7 @@ export default {
         }
     }
     .content{
-        height: auto;
+        height: 100%;
         position: absolute;
         top: 70px;
         left: 0;

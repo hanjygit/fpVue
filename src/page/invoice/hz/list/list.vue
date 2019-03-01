@@ -43,7 +43,7 @@
                     <button class="whitebtn"> <img src="../../../../assets/invoice/sc.png">批量删除</button>
                 </div>
             </fplistbtn>
-            <fplistcontainer :thData="listTh" :tbData="listtbData">
+            <fplistcontainer :thData="listTh" :tbData="listtbData" @pageCallBack="pageList">
                 <!--<ul slot="listContent" class="table-container">
                     <li v-for="(item, index) in this.listHeader" :key="index" class="table-header" ref="tableHeader"  :style="{width: item.width}">{{item.label}}</li>
                 </ul>-->
@@ -281,6 +281,9 @@ export default {
                 // 执行某些操作
             })*/
         },
+        pageList:function(msg){
+            console.log(msg)
+        }
     },
 }
 </script>
