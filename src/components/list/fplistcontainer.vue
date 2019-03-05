@@ -26,40 +26,24 @@
         <div class="footerList" @click="sendpage">
             <div class="selectBox">
               <div class="selectBox_show" @click.stop="arrowDown">
-                <i class="icon icon_arrowDown"></i>
-                <p>{{pageVal}}</p>
+                <!--<i class="icon icon_arrowDown"></i>-->
+                <p>{{pageList.pageVal}}</p>
                 <!--<input name="unit" v-model="pageVal">-->
               </div>
-              <div class="selectBox_list" v-show="isShowSelect">
-                <div class="selectBox_listLi" v-for="(item, index) in pageList"
-                     @click="select(item, index)" :class="pageVal==item.value?'selectBox_listfocus':''">{{item.value}}
+              <div class="selectBox_list" v-show="pageList.isShowSelect">
+                <div class="selectBox_listLi" v-for="(item, index) in pageList.pageSelectList"
+                     @click="select(item, index)" :class="pageList.pageVal==item.value?'selectBox_listfocus':''">{{item.value}}
                 </div>
               </div>
             </div>
-
-            <!--<div class="page-select  ui-select ui-input ">
-                <div class="ui-select-text ui-input-text page-select-text " style="width: 25px; height: 16px;">20</div>
-                <input value="20" readonly="" placeholder="">
-            </div>-->
-            <!--<select>
-                <option value="1">1</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="20">50</option>
-                <option value="20">100</option>
-            </select>-->
-            <!--<div class="line"></div>
-            <div class="page-btn   page-btn-disabled  ui-disabled"><div class="first"></div></div>
-            <div class="page-btn   page-btn-disabled  ui-disabled"><div class="prev"></div></div>
-            <div class="line"></div>
-            <div class="page-go">第<div class="ui-input ui-number ui-text"><input value="1"></div>共0页</div>
-            <div class="line"></div>
-            <div class="page-btn   page-btn-disabled  ui-disabled"><div class="next"></div></div>
-            <div class="page-btn   page-btn-disabled  ui-disabled"><div class="last"></div></div>
-            <div class="line"></div>
-            <div class="page-btn  "><div class="refresh"></div></div>
-            <div class="page-info">显示1到20，共0记录</div>-->
+            <div class="pageicon pagefirst"></div>
+            <div class="pageicon pagepre"></div>
+            <div class="pageNow">第<input class="pageNowVal" v-model='pageList.pageNow'>页</div>
+            <div class="pageAll">共{{pageList.pageAll}}页</div>
+            <div class="pageicon pagenext"></div>
+            <div class="pageicon pagelast"></div>
+            <div class="pageicon pagerefresh"></div>
+            <div class="page-info">显示{{pageList.pageShowf}}到{{pageList.pageShowt}}，共{{pageList.pageAllList}}记录</div>
         </div>
         
     </div>
@@ -77,18 +61,25 @@ export default {
             listTable:'',
             dataConversion:dataConversion,
             dateConversion:dateConversion,
-            //翻页选择页面
-            isShowSelect: false,
-            pageList: [
-                {key: 1, value: "1"},
-                {key: 2, value: "5"},
-                {key: 3, value: "10"},
-                {key: 4, value: "20"},
-                {key: 5, value: "50"},
-                {key: 6, value: "100"},
-            ],
-            pageVal:'1',
-            unitModel:''
+            //翻页
+            pageList:{
+                isShowSelect: false,
+                pageSelectList: [
+                    {key: 1, value: "1"},
+                    {key: 2, value: "5"},
+                    {key: 3, value: "10"},
+                    {key: 4, value: "20"},
+                    {key: 5, value: "50"},
+                    {key: 6, value: "100"},
+                ],
+                pageVal:'1', //页面显示条数
+                pageNow:1,   //当前显示第几页
+                pageAll:'n',     //一共几页
+                pageShowf:'1',   //从第几条记录显示
+                pageShowt:'n',   //显示到第几条记录
+                pageAllList:'n', //一共几条记录
+            }
+            
         }
     },
     modules: {
@@ -109,18 +100,25 @@ export default {
                 }
             },  
             deep: true
+        },
+        pageList: {  
+            handler(newVal, oldVal) { 
+                console.log(newVal,'newVal');
+                console.log(oldVal,'oldVal');
+            },  
+            deep: true
         } 
     },
     methods: {
         arrowDown() {
-            this.isShowSelect = !this.isShowSelect;
+            this.pageList.isShowSelect = !this.pageList.isShowSelect;
         },
         select(item, index) {
-            this.isShowSelect = false;
-            this.pageVal = item.value;
+            this.pageList.isShowSelect = false;
+            this.pageList.pageVal = item.value;
         },
         sendpage(){
-            this.$emit('pageCallBack', this.pageVal);
+            //this.$emit('pageCallBack', this.pageList);
         }
     }
 }
@@ -201,11 +199,10 @@ export default {
             vertical-align: middle;
             width: 50px;
             font-size: 14px;
-            margin: 0 6px;
             .selectBox_show{
+                background: url(../../assets/common/pagemore.png) no-repeat 35px center;
                 p{
                     padding-left: 5px;
-                    width: 50px;
                     border: 1px solid #E0E0E0;
                     border-radius: 4px;
                 }
@@ -232,6 +229,56 @@ export default {
                     color: #fff;
                 }
             }
+        }
+        .pageicon{
+            width: 12px;
+            height: 10px;
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .pagefirst{
+            background: url(../../assets/common/pagebtn-first.png) no-repeat 0 center;
+        }
+        .pagepre{
+            background: url(../../assets/common/pagebtn-pre.png) no-repeat 0 center;
+        }
+        .pagenext{
+            background: url(../../assets/common/pagebtn-next.png) no-repeat 0 center;
+        }
+        .pagelast{
+            background: url(../../assets/common/pagebtn-last.png) no-repeat 0 center;
+        }
+        .pagerefresh{
+            background: url(../../assets/common/pagebtn-refresh.png) no-repeat 0 center;
+        }
+        .pageNow{
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .pageNowVal{
+            display: inline-block;
+            /*vertical-align: top;*/
+            width: 30px;
+            box-sizing: border-box;
+            border: 1px solid #E0E0E0;
+            border-radius: 4px;
+            padding-left: 5px;
+            margin: 0 5px;
+        }
+        .pageAll{
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .page-info{
+            margin-left: 10px;
+            font-size: 14px;
+            float: right;
         }
     }
 </style>
