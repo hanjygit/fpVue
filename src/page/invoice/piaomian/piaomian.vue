@@ -1,13 +1,15 @@
 <template>
     <div class="piaomian">
-    piaomian
+    <fppm></fppm>
     </div>
 </template>
 
 <script>
+import fppm from 'components/fppiaomian/fppm.vue'
 export default {
     name:'piaomian',
     components:{
+        fppm
     },
     data() {
         return {        }
@@ -20,4 +22,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+    .piaomian{
+        height: 100%;
+    }
 </style>
