@@ -197,6 +197,18 @@ var data = {
                     "url": "#/invoice/split/bill"
 }, */
                 {
+                    "children": [],
+                    "dj": 2,
+                    "icons": "level_2_ewmsc",
+                    "id": 17,
+                    "name": "手工填开专票",
+                    "parentId": 2,
+                    "parentName": "发票开具",
+                    "selected": false,
+                    "seqNum": 22,
+                    "url": "/invoice/piaomian"
+                },
+                {
                     "children": [
                         {
                             "children": [],

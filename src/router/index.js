@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import login from '@/page/login/login'
 import indexnav from '@/page/indexnav/indexnav'
 import create from '@/page/invoice/hz/create/create'
+import piaomian from '@/page/invoice/piaomian/piaomian'
 import list from '@/page/invoice/hz/list/list'
 import qrcode from '@/page/invoice/qrcode/qrcode'
 import user from '@/page/system/user/user'
@@ -26,6 +27,11 @@ export default new Router({
             name: 'indexnav',
             component:indexnav,
             children: [
+                {
+                  path: '/invoice/piaomian',
+                  name: 'piaomian',
+                  component:piaomian
+                },
                 {
                   path: '/invoice/hz/list',
                   name: 'list',

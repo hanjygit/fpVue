@@ -389,9 +389,9 @@ export default {
             min-width: 1000px;
             height: 100%;
             font-size: 14px;
-            padding: 20px;
+            margin: 20px;
             box-sizing: border-box;
-            background: #f3f3f3;
+            background: #ffffff;
         }
     }
    
