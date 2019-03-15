@@ -23,6 +23,9 @@ export default {
 </script>
 <style scoped lang="less">
     .piaomian{
-        height: 100%;
+        width: 1040px;
+        height: 606px;
+        border: 1px solid #E0E0E0;
+        box-shadow: 0 0 10px #ccc;
     }
 </style>

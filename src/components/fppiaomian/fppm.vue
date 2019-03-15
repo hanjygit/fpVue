@@ -39,10 +39,11 @@
                         <div class="tbmc">
                             <span class="gmftitle">名　　　　称：</span>
                             <input class="gmfcontent">
+                            <button class="small_select customerSelect" type="button">···</button>
                         </div>
                         <div class="tbnsrsbh">
                             <span class="gmftitle">纳税人识别号：</span>
-                            <input class="gmfcontent">>
+                            <input class="gmfcontent">
                         </div>
                         <div class="tbdzdh">
                             <span class="gmftitle">地址  、  电话：</span>
@@ -72,7 +73,10 @@
                     <div class="midlist">
                         <ul class="midConten">
                             <li style="width:5%">1</li>
-                            <li style="width:20%"><input></li>
+                            <li style="width:20%;position: relative;">
+                                <input>
+                                <button class="small_select taxNumSelectBtn" style="top:7px" >···</button>
+                            </li>
                             <li style="width:8%">规格型号</li>
                             <li style="width:6%">单位</li>
                             <li style="width:9%"><input></li>
@@ -185,12 +189,9 @@ export default {
 </script>
 <style scoped lang="less">
     .fppm{
-        width: 1040px;
-        height: 606px;
         display: flex;
         overflow: hidden;
-        border: 1px solid #E0E0E0;
-        box-shadow: 0 0 10px #ccc;
+        background-color: #fff;
     }
     .edgebg{
         width: 40px;
@@ -215,6 +216,23 @@ export default {
     .pm_all{
         flex: 1;
         margin: 0 15px;
+        .small_select{
+            width: 20px;
+            height: 16px;
+            line-height: 16px;
+            background: #4DA1FF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            cursor: pointer;
+        }
     }
     .fpTitle{
         font-size: 0;
@@ -299,6 +317,7 @@ export default {
             .tbmc,.tbnsrsbh,.tbdzdh,.tbkhh{
                 height: 25px;
                 font-size: 0;
+                position: relative;
             }
             .gmftitle{
                 width: 20%;

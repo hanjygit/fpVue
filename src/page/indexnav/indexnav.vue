@@ -391,7 +391,7 @@ export default {
             font-size: 14px;
             margin: 20px;
             box-sizing: border-box;
-            background: #ffffff;
+            /*background: #ffffff;*/
         }
     }
    
