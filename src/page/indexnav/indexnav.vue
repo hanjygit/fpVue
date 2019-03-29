@@ -24,10 +24,12 @@
                                     {{ item.name }}
                                 </router-link>
                             </div>
-                            <div v-if="item.children.length != 0">
-                                <div class="second_navText">{{ item.name }}</div>
+                            <div v-if="item.children.length > 0">
+                                <div class="second_navText" :class="nowSecondIndex == index?'isSecondNav':''">{{ item.name }}</div>
                                 <div class="third_nav">
+                                   
                                     <ul v-if="nowSecondIndex == index">
+                                       <!--v-if="nowSecondIndex == index"-->
                                         <li v-for="(_item, _index) in item.children" :key="_index" :class="nowThirdIndex == _index?'isThirdNav':''" @click.capture="chooseThirdNav(_item, _index)" >
                                             <router-link :to="_item.url">
                                                 {{ _item.name }}
@@ -100,8 +102,8 @@ export default {
             navdata_second:[],                  //二级菜单数据
             navdata_third:[],                   //三级菜单数据
             nowFirstIndex:0,                    //当前一级菜单
-            nowSecondIndex:0,                   //当前二级带单
-            nowThirdIndex:0,                    //当前三级带单
+            nowSecondIndex:'',                   //当前二级带单
+            nowThirdIndex:'',                    //当前三级带单
             isdialogTitle:'',                   //弹窗标题
             isdialogStatus:'',                   //弹窗状态：成功或失败
             isdialogShow:false,                   //弹窗是否显示
@@ -158,10 +160,10 @@ export default {
             this.navdata_first = data.data.resourceList;
             this.navdata_second = this.navdata_first[0].children;
             this.nowFirstIndex = 0;
-            if (this.$route.path === '/') {
+            /*if (this.$route.path === '/') {
                 // route为空，找到一个默认有权限菜单
                 this.$router.push(this.navdata_second[0].children[0].url)
-            }
+            }*/
         },
         //选择一级菜单
         /*nextNav 下一级参数*/
@@ -180,6 +182,8 @@ export default {
         /*nextNav 下一级参数*/
         chooseSecondNav:function(item, index){
             this.nowSecondIndex = index;
+            
+            console.log(this.nowSecondIndex)
             this.nowThirdIndex = 0;
             if(item.children.length>0){
                 this.navdata_third = item.children;
