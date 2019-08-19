@@ -12,14 +12,14 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {     //跨域
         '/rbac':{
-            target: 'http://192.168.2.105:59011', //测试环境//目标接口域名
+            target: '', //测试环境//目标接口域名
             pathRewrite: {                //重写接口
               '^/rbac': '/rbac'      
             },
             changeOrigin: true,       //是否跨域
           },
         '/api':{
-            target: 'http://192.168.2.105:59012', //测试环境
+            target: '', //测试环境
             pathRewrite: {
               '^/api': '/api'
             },
