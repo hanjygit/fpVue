@@ -60,6 +60,7 @@ export default {
             delCookie('GH_token');
         },
         login(){
+          //  this.$router.push('/');
             let regName = /[a-zA-Z0-9]{1,30}/g;
             if (!regName.test(this.username)) {
               this.loginError = true;
@@ -90,7 +91,7 @@ export default {
                 })
             }
         }
-    },
+    }
 }
 </script>
 <style scoped lang="less">
